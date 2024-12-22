@@ -4,17 +4,21 @@ server:
 spring:
   application:
     name: dubbo-server
-  cloud:
-    nacos:
-      config:
-        server-addr: @nacos.server@
-        username: @nacos.username@
-        password: @nacos.password@
-        discovery:
-          # ???
-          group: @nacos.discovery.group@
-          namespace: ${spring.profiles.active}
-        config:
-          # ???
-          group: @nacos.config.group@
-          namespace: ${spring.profiles.active}
+  profiles:
+    active: dev
+
+dubbo:
+  application:
+    logger: slf4j
+    metadata-type: remote
+    qos-enable: true
+    qos-port: 22223
+    qos-accept-foreign-ip: false
+  registry:
+    address: nacos://${nacos.address:127.0.0.1}:8848?username=nacos&password=nacos
+    parameters:
+      namespace: ${spring.profiles.active}
+    register-mode: instance
+  protocol:
+    name: tri
+    port: 50052

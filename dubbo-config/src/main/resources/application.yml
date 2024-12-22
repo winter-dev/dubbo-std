@@ -1,0 +1,19 @@
+server:
+  port: 8000
+
+
+spring:
+  application:
+    name: dubbo-server
+  cloud:
+    nacos:
+      config:
+        server-addr: @nacos.server@
+        username: @nacos.username@
+        password: @nacos.password@
+        discovery:
+          group: @nacos.discovery.group@
+          namespace: ${spring.profiles.active}
+        config:
+          group: @nacos.config.group@
+          namespace: ${spring.profiles.active}
